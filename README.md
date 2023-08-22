@@ -91,27 +91,57 @@ I filled in [MASK] in the places they were originally.
 
 This is the iterative evolution of the prompt, being filled by BERT:
 ~~~bash
-In order to make a sandwich, first slice some [MASK], then put together , add 
+Original prompt: In order to make a sandwich, first slice some [MASK], then put together [MASK], add [
+[MASK] sauce, and add [MASK] and [MASK].
+
+1st iter: In order to make a sandwich, first slice some [MASK], then put together , add 
  sauce, and add  and .
 
-In order to make a sandwich, first slice some bread, then put together [MASK], add 
+2nd iter: In order to make a sandwich, first slice some bread, then put together [MASK], add 
  sauce, and add  and  as you desire.
 
-In order to make a sandwich, first slice some bread, then put together it, add [MASK]
+3rd iter: In order to make a sandwich, first slice some bread, then put together it, add [MASK]
  sauce, and add  and  as you desire.
 
-In order to make a sandwich, first slice some bread, then put together it, add tomato
+4th iter: In order to make a sandwich, first slice some bread, then put together it, add tomato
 sauce, and add [MASK] and  as you desire.
 
-In order to make a sandwich, first slice some bread, then put together it, add tomato
+5th iter: In order to make a sandwich, first slice some bread, then put together it, add tomato
 sauce, and add cheese and .
 
-In order to make a sandwich, first slice some bread, then put together it, add tomato
+6th iter: In order to make a sandwich, first slice some bread, then put together it, add tomato
 sauce, and add cheese and [MASK].
 
-In order to make a sandwich, first slice some bread, then put together it, add tomato
+7th iter: In order to make a sandwich, first slice some bread, then put together it, add tomato
 sauce, and add cheese and [MASK].
 
-In order to make a sandwich, first slice some [MASK], then put together [MASK], add [
-[MASK] sauce, and add [MASK] and [MASK].
+8th iter: In order to make a sandwich, first slice some bread, then put together it, add tomato
+sauce, and add cheese and ham.
+~~~
+
+And... TADA! That's a much more tasty and healthy sandwich than the one suggested by gpt2. The steps to write the prompt over and over
+with the [MASK] tokens can be easily automated with code, and the answer is much more meaningful than the one provided by gpt2.
+
+We can even enjoy the process of considering the output from the model, and choose one or another, depending on our preferences,
+making the experience richer than just waiting for a GPT like model to write the response.
+
+This absolutely feels like a win! We are moving forward with BERT models: much harder to tame, but with quite a lot
+of control over it.
+
+As a last experiment that I have gone through these last days, and some of the ideas that popped up to make this BERT thing speak! I would
+like to highlight that possibly we could consider BERT models to behave as an error correcting code for text generations. That is, in a similar
+way as a diffusion model starts from noise (all tokens set to PAD, or random tokens in a sentence) we could eventually feed the text to BERT,
+generate such first generation of random tokens, or set them to PAD, and provide a context; the context could be taken by a retrieval mechanism
+like LlamaIndex, or with classic NLP models like (GloVe or ElMo) to keep the thing small; from a corpus of data. That context (as BERT reads tokens from the future and the past
+of the [MASK] token) would be read by BERT, and BERT would know that on the future, the interest are "sandwich making" generations, or "football" generations,
+whatever that is, and BERT would start filling the [MASK] with meaningful contents. We could iterate on the process for a certain amount of epochs until the
+text generation would be stable, or until a certain amount of epochs is reached.
+
+Here is a quick example of the experiment; in this case, I do not provide random tokens at first, but show that the model can fill in the MASK tokens
+by knowing the context given in the second sentence:
+~~~bash
+In order to [MASK] a MASK we need to add MASK. Sandwiches are made of bread and other ingredients like ham, cheese, lettuce, tomato...
+In order to make a [MASK] we need to add MASK. Sandwiches are made of bread and other ingredients like ham, cheese, lettuce, tomato...
+In order to make a sandwich we need to add [MASK]. Sandwiches are made of bread and other ingredients like ham, cheese, lettuce, tomato...
+In order to make a sandwich we need to add butter. Sandwiches are made of bread and other ingredients like ham, cheese, lettuce, tomato...
 ~~~
