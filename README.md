@@ -21,7 +21,16 @@ Even though, there have been several attempts to achieve such objective that fee
 - BERT has a mouth, and it must speak: https://arxiv.org/pdf/1902.04094.pdf
 - Distilling Knowledge Learned in BERT for Text Generation: https://aclanthology.org/2020.acl-main.705.pdf
 
+Prior to starting with the experiments taken, and the researched ideas in the ecosystem; a quick introduction on
+how BERT models work, would be interesting:
+- BERT models predict the words in a sentence marked with the special token "[MASK]".
+- BERT models have access to the contents prior to the "[MASK]" tokens, and after the "[MASK]" tokens; they work a bit different to how GPT
+like modeks work, as the GPT like models only have access to the contents prior to the word to be predicted.
+- BERT models provide for each "[MASK]" token, a list with the most likely words to be the filling in each case, to make the sentence semantically correct and meaningful.
+
 Following the ideas from different forums, blogs, and repositories, I have found many responses to the question
 to suggest that by simply asking the BERT model to predict the next word, by masking a blank word, and then
 appending it to the prompt, and recursively (in a loop) asking for the next word; BERT should be able to generate
-semantically correct and meaningful text.
+semantically correct and meaningful text (and we could not resist the attempt to not try it :) ).
+
+With that being said, we have found that by just pre
