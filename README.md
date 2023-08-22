@@ -33,4 +33,10 @@ to suggest that by simply asking the BERT model to predict the next word, by mas
 appending it to the prompt, and recursively (in a loop) asking for the next word; BERT should be able to generate
 semantically correct and meaningful text (and we could not resist the attempt to not try it :) ).
 
-With that being said, we have found that by just pre
+With that being said, we have found that by just adding one [MASK] at the end of the sentence, and asking BERT
+for the most likely word, and repeating over and over in a loop, will not work to provide meaningful sentences.
+
+Here is a quick experiment that you can attempt with the source code in the repository, and the obtained result:
+~~~bash
+In order to make a sandwich, first like thinking inside possible world two work once another right behind missing story me until was cool without deep formation building go on real formation shot line a step gone started lose on too back about strike ring as possible deep pit stop ii begins stopped track hit broke about so until on pulled safe once movement call formation deep port attack song we i went we told o names said was still boy dead of cancer over loose safe standing
+~~~
