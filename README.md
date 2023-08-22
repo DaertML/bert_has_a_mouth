@@ -37,6 +37,36 @@ With that being said, we have found that by just adding one [MASK] at the end of
 for the most likely word, and repeating over and over in a loop, will not work to provide meaningful sentences.
 
 Here is a quick experiment that you can attempt with the source code in the repository, and the obtained result:
+Given the prompt:
+~~~bash
+In order to make a sandwich, first [MASK]
+~~~
+
+We obtain the following text generation:
 ~~~bash
 In order to make a sandwich, first like thinking inside possible world two work once another right behind missing story me until was cool without deep formation building go on real formation shot line a step gone started lose on too back about strike ring as possible deep pit stop ii begins stopped track hit broke about so until on pulled safe once movement call formation deep port attack song we i went we told o names said was still boy dead of cancer over loose safe standing
 ~~~
+
+Something that lacks a correct syntax; making less sense when considering the semantic meaning; and we can not even consider that this approximates to something meaningful
+if we consider that we are prompting it to make a sandwich.
+
+By asking a similarly small model, and with as much capabilities as the BERT model, from the GPT family; we get a semantically correct, and kind of meaningful response from the model:
+Giving this prompt to gpt2:
+~~~bash
+In order to make a sandwich, first 
+~~~
+
+We obtain the following generation:
+~~~bash
+In order to make a sandwich, first you need to make sure you have a good amount of fat in your sandwich.
+~~~
+
+An absolutely unhealthy suggestion by gpt2, but with absolute semantic meaning in english, and speaking of something with absolute relationship: fat as an ingredient for a prepared meal.
+
+With that in mind, and the first failure on our backs; we should consider different ways to improve this process of text generation with BERT models.
+
+Something that has absolutely improved the performance of the process (I do not have empiric measures for it, but in practice, I find this useful) is to take advantage
+of the way the model is trained, and attempt to mimic the process that it follows during training. Unless you fine tune the BERT model to predict the last word in the sentence
+(something that should potentially boost the performance of the model and work just as fine as gpt2 if we compare them), we would be losing a lot of capabilities from BERT,
+as such models are trained, by making the model to consider the future words and previous words to each [MASK] token, because of that, BERT will absolutely know about what we are
+talking about, if we add context at the end of the sentence, at least some context.
