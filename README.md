@@ -155,9 +155,6 @@ In order to make a [MASK] we need to add MASK. Sandwiches are made of bread and 
 In order to make a sandwich we need to add butter. Sandwiches are made of bread and other ingredients like ham, cheese, lettuce, tomato...
 ~~~
 
-With even less context:
-
-
 And in this example we try to adversarially confuse it (in this case, consider that the tokens in this subsentence will be used as adversarial
 and eventually replaced by a [MASK] token and then by a word by BERT: "PAD cheese Meal Food Ham"):
 ~~~bash
@@ -197,6 +194,24 @@ On the standard fast food sandwich you need to add meat. Sandwiches are made wit
 On the standard fast food sandwich you need to add meat. Sandwiches are made with meat and other ingredients like onion, garlic, [MASK], tomato...
 On the standard fast food sandwich you need to add meat. Sandwiches are made with meat and other ingredients like onion, garlic, pepper, [MASK]...
 On the standard fast food sandwich you need to add meat. Sandwiches are made with meat and other ingredients like onion, garlic, pepper, tomatoes...
+~~~
+
+As we can see, it regenerates a valid response, providing a slightly new recipe for the sandwich :)
+
+It feels like an epic win after all this work, as a last test that I have found interesting, one could provide adjectives or tags for the kind of sandwich that they would like to prepare,
+and depending on such, the ingredients will be different, if we choose to procide tags related with how healthy it should be, the predicted words are different:
+~~~bash
+Sandwiches are made of bread and other ingredients like [MASK], [MASK], [MASK], [MASK]... healthy, vegetables, delicious, fit, energy.
+Sandwiches are made of bread and other ingredients like meat, fish, [MASK], MASK... healthy, vegetables, delicious, fit, energy. 
+Sandwiches are made of bread and other ingredients like meat, fish, vegetables, [MASK]... healthy, vegetables, delicious, fit, energy. 
+Sandwiches are made of bread and other ingredients like meat, fish, vegetables, meat... healthy, vegetables, delicious, fit, energy. 
+~~~
+
+~~~bash
+Sandwiches are made of bread and other ingredients like [MASK], [MASK], [MASK], [MASK]... unhealthy, fat, obesity, hamburger, bad, obese.
+Sandwiches are made of bread and other ingredients like bread, [MASK], MASK, MASK... unhealthy, fat, obesity, hamburger, bad, obese. 
+Sandwiches are made of bread and other ingredients like bread, sausage, [MASK], MASK... unhealthy, fat, obesity, hamburger, bad, obese. 
+Sandwiches are made of bread and other ingredients like bread, sausage, bacon, chicken... unhealthy, fat, obesity, hamburger, bad, obese. 
 ~~~
 
 For each of the experiments, I have mostly used the most likely result provided by BERT, in some occasions I have chosen not repeated words, or
