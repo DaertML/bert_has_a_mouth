@@ -84,4 +84,34 @@ In order to make a sandwich, first slice some [MASK], then put together [MASK], 
 ~~~
 
 I am using the model located at huggingface, to do this example (https://huggingface.co/bert-base-uncased), because of that, if I input all the MASK tokens at the same time, it is uncapable
-of predicting anything useful, and will output just "undefined" as the token. I do not know a lot of the internals of BERT models
+of predicting anything useful, and will output just "undefined" as the token. I do not know a lot of the internals of BERT models, so I do not know if it is possible to predict
+multiple MASK tokens at the same time. Somehow, I told you we are going to give that prompt directly to the model, as if it were a prompt to a GPT like model, and we are going to see
+the results that we obtain. In order to do that, I have removed the "[MASK]" of each [MASK] after the first [MASK] in the prompt, and kept the spaces, as the tokens were generated,
+I filled in [MASK] in the places they were originally.
+
+This is the iterative evolution of the prompt, being filled by BERT:
+~~~bash
+	In order to make a sandwich, first slice some [MASK], then put together , add 
+ sauce, and add  and .
+
+	In order to make a sandwich, first slice some bread, then put together [MASK], add 
+ sauce, and add  and  as you desire.
+
+In order to make a sandwich, first slice some bread, then put together it, add [MASK]
+ sauce, and add  and  as you desire.
+
+In order to make a sandwich, first slice some bread, then put together it, add tomato
+sauce, and add [MASK] and  as you desire.
+
+In order to make a sandwich, first slice some bread, then put together it, add tomato
+sauce, and add cheese and .
+
+In order to make a sandwich, first slice some bread, then put together it, add tomato
+sauce, and add cheese and [MASK].
+
+In order to make a sandwich, first slice some bread, then put together it, add tomato
+sauce, and add cheese and [MASK].
+
+	In order to make a sandwich, first slice some [MASK], then put together [MASK], add [
+[MASK] sauce, and add [MASK] and [MASK].
+~~~
