@@ -70,3 +70,18 @@ of the way the model is trained, and attempt to mimic the process that it follow
 (something that should potentially boost the performance of the model and work just as fine as gpt2 if we compare them), we would be losing a lot of capabilities from BERT,
 as such models are trained, by making the model to consider the future words and previous words to each [MASK] token, because of that, BERT will absolutely know about what we are
 talking about, if we add context at the end of the sentence, at least some context.
+
+Something that should be noted before we move on, fine tuning on a specific dataset, to make the BERT model predict words for that field, is something that has been done over
+and over again in the state of the art, and is much more than useful. So yep, you are much more than welcomed to fine tune a BERT model on a certain dataset, before moving on if you wish.
+
+With that being said, let's take advantage of the way BERT is trained; our prompts for BERT will not go in the same direction as the prompts that we use for GPT, in which we provide an
+instruction or sentence, and we wait for the model to answer back. In this case we are going to prompt it using [MASK] tokens, and seeing which are the model's suggestions.
+
+Let's go back to the example below, with this prompt for BERT:
+~~~bash
+In order to make a sandwich, first slice some [MASK], then put together [MASK], add [
+[MASK] sauce, and add [MASK] and [MASK].
+~~~
+
+I am using the model located at huggingface, to do this example (https://huggingface.co/bert-base-uncased), because of that, if I input all the MASK tokens at the same time, it is uncapable
+of predicting anything useful, and will output just "undefined" as the token. I do not know a lot of the internals of BERT models
