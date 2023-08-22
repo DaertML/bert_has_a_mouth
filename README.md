@@ -91,10 +91,10 @@ I filled in [MASK] in the places they were originally.
 
 This is the iterative evolution of the prompt, being filled by BERT:
 ~~~bash
-	In order to make a sandwich, first slice some [MASK], then put together , add 
+In order to make a sandwich, first slice some [MASK], then put together , add 
  sauce, and add  and .
 
-	In order to make a sandwich, first slice some bread, then put together [MASK], add 
+In order to make a sandwich, first slice some bread, then put together [MASK], add 
  sauce, and add  and  as you desire.
 
 In order to make a sandwich, first slice some bread, then put together it, add [MASK]
@@ -112,6 +112,6 @@ sauce, and add cheese and [MASK].
 In order to make a sandwich, first slice some bread, then put together it, add tomato
 sauce, and add cheese and [MASK].
 
-	In order to make a sandwich, first slice some [MASK], then put together [MASK], add [
+In order to make a sandwich, first slice some [MASK], then put together [MASK], add [
 [MASK] sauce, and add [MASK] and [MASK].
 ~~~
